@@ -1,0 +1,44 @@
+from collections import deque
+
+
+def vendedorDeMangas(pessoa):
+    if pessoa[-1] == "m":
+        return True
+    return False
+
+
+def pesquisa(nome):
+    filaDePesquisa = deque()
+    filaDePesquisa += grafo[nome]
+    verificadas = []
+    while filaDePesquisa:
+        pessoa = filaDePesquisa.popleft()
+        if pessoa not in verificadas:
+            if vendedorDeMangas(pessoa):
+                print(f"{pessoa} é um vendedor de mangas!")
+                return True
+            else:
+                print(f"{pessoa} não é um vendedor de mangas.")
+                print(f"Adicionando os amigos de {pessoa} à fila de pesquisa.")
+                print(f"Fila de pesquisa atual: {list(filaDePesquisa)}")
+                print(f"Amigos de {pessoa}: {grafo[pessoa]}")
+                filaDePesquisa += grafo[pessoa]
+                verificadas.append(pessoa)
+                print(f"Fila de pesquisa atualizada: {list(filaDePesquisa)}")
+                print(f"Lista de pessoas verificadas: {verificadas}")
+                print("--------------------------------------------------")
+    return False
+
+
+
+
+grafo = {} 
+grafo["voce"] = ["alice", "bob", "claire"] 
+grafo["bob"] = ["anuj", "peggy"] 
+grafo["alice"] = ["peggy"] 
+grafo["claire"] = ["thom", "jonny"] 
+grafo["anuj"] = [] 
+grafo["peggy"] = [] 
+grafo["thom"] = [] 
+grafo["jonny"] = []
+pesquisa("voce")
